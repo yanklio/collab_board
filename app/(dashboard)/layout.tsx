@@ -26,7 +26,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { orgId } = auth();
+  const { orgId } = await auth();
 
   if (!orgId) {
     return {
@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   }
 
-  const client = clerkClient();
+  const client = await clerkClient();
 
   const org = await client.organizations.getOrganization({
     organizationId: orgId,
